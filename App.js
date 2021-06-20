@@ -7,24 +7,23 @@
  */
 
 import React from 'react';
-import type { Node } from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
-} from 'react-native';
+import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import { Header, NewsCategories } from './src/components';
+import NewsStackNavigator from './src/routes/NewsStackNavigator';
 
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <SafeAreaView >
+    <>
+      {/* <SafeAreaView > */}
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Header title={'News Card'} />
-      <NewsCategories />
-    </SafeAreaView>
+      {/* <Header title={'News Card'} /> */}
+      {/* <NewsCategories /> */}
+      <NewsStackNavigator />
+      {/* </SafeAreaView> */}
+    </>
   );
 };
 

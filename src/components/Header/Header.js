@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
-
+import { ImageBackground, StyleSheet, Text } from "react-native";
 
 export default class Header extends Component {
 

@@ -6,13 +6,14 @@ export default class NewsByCategory extends Component {
 
 
     render() {
-        const { title, image } = this.props
+        const { route, navigation } = this.props
+        const {category} = route.params
         return (
             <TouchableRipple
                 onPress={() => console.log('Pressed')}
                 rippleColor="rgba(0, 0, 0, .32)"
             >
-               <Text>TEXT</Text>
+               <Text>{category}</Text>
             </TouchableRipple>
         )
     }

@@ -6,10 +6,10 @@ export default class NewsCard extends Component {
 
 
     render() {
-        const { title, image } = this.props
+        const { category, image, navigation } = this.props
         return (
             <TouchableRipple
-                onPress={() => console.log('Pressed')}
+                onPress={() => navigation.navigate('NewsByCategory', { category })}
                 rippleColor="rgba(0, 0, 0, .32)"
             >
                 <Card>
@@ -20,7 +20,7 @@ export default class NewsCard extends Component {
                                 style={styles.avatar}
                                 source={{ uri: image || 'https://cdn4.iconfinder.com/data/icons/basics-set-2/100/Question-512.png' }}
                             />
-                            <Title>{title}</Title>
+                            <Title>{category}</Title>
                         </View>
                     </Card.Content>
                 </Card>
