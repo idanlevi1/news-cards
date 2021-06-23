@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Api from '../../utils/Api';
-import { Loader, NewsCard, NoResults } from '../../components';
-import { LANGUAGES } from '../../utils/Enums';
+import { Avatar, Button, Card, Title, Paragraph, Subheading, Caption, TouchableRipple } from 'react-native-paper';
 import Colors from '../../utils/Colors';
+import moment from 'moment';
 
 
 export default class Article extends Component {
@@ -14,47 +14,54 @@ export default class Article extends Component {
         };
     }
 
-
-    async componentDidMount() {
-        // try {
-        //     const { route } = this.props
-        //     const { category } = route.params
-        //     const news = await Api.GetNews({ categories: category, languages: LANGUAGES.ENGLISH })
-        //     console.log("Categories -> componentDidMount -> news", news)
-        //     if (news.error) {
-        //         throw new Error(news.error.message)
-        //     }
-        //     this.setState({ news: news.data })
-        // } catch (error) {
-        //     console.log("NewsByCategory -> componentDidMount -> error", error)
-            this.setState({ news: [] })
-        // }
-    }
-
-    renderNewsCardItem = ({ item, index }) => (<NewsCard {...item} {...this.props} />)
-
     render() {
-        const { news } = this.state
+        const { route } = this.props
+        const { title, description, image, source, category, published_at, author } = route.params
+        console.log("Article -> render -> route.params", route.params)
         return (
-            <>
-                {news ? news.length ?
-                    <FlatList
-                        style={styles.cardsContainer}
-                        data={news}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={this.renderNewsCardItem} />
-                    :
-                    <NoResults />
-                    : <Loader color={'#FFF'} />
-                }
-            </>
+            <View style={styles.cardContainer}>
+                <ScrollView style={styles.container}>
+                    <Card.Content>
+                        <Title style={styles.title} >{title}</Title>
+                        <Caption tyle={styles.sourceText}>{source}</Caption>
+                        <Caption tyle={styles.sourceText}>{category}</Caption>
+                        {author ? <Caption>{author}</Caption> : <React.Fragment />}
+                        <Caption >{moment(published_at).format("DD.MM.YYYY")}</Caption>
+                        {image ? <Card.Cover source={{ uri: image }} style={styles.image} /> : <React.Fragment />}
+                        {description ? <Subheading>{description}</Subheading> : <React.Fragment />}
+
+                    </Card.Content>
+                    <Card.Actions>
+                        <Button>Cancel</Button>
+                        <Button>Ok</Button>
+                    </Card.Actions>
+                </ScrollView>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    cardsContainer: {
+    container: {
         backgroundColor: Colors.off_white,
-        paddingTop: 16,
+        padding: 12
+
     },
+    cardContainer: {
+        flex: 1,
+    },
+    title: {
+        fontSize: 23,
+        lineHeight: 26,
+        paddingTop: 14,
+        paddingBottom: 3
+    },
+    sourceAndDate: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
+        paddingVertical: 4,
+    },
+    image: {
+        marginVertical: 20,
+    }
 });
