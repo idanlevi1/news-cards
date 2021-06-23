@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { FlatList } from "react-native";
-import { NewsCategoryCard } from '..';
+import { NewsCategoryCard } from '../../components';
 import newsCategoriesListUS from '../../data/news_categories_us.json';
 
 
-export default class NewsCategories extends Component {
+export default class Categories extends Component {
 
     renderCategoryItem = ({ item, index }) => (<NewsCategoryCard {...item} {...this.props} />)
 

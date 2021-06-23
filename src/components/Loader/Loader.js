@@ -14,7 +14,7 @@ function Loader({ text = 'Loading...', color = Colors.black, size = 'large' }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.black_opacity,
+        backgroundColor: Colors.light_green,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     textLoader: {
-        fontSize: 16,
-        color: Colors.white,
+        fontSize: 20,
+        color: Colors.black,
         marginTop: 20
     }
 })

@@ -1,8 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NewsCategories, Header } from '../components';
-import { NewsByCategory } from '../screens';
+import { NewsByCategory, Categories } from '../screens';
 import { Button } from 'react-native-paper';
 
 const Stack = createStackNavigator();
@@ -11,7 +10,7 @@ function NewsStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="NewsCategories" component={NewsCategories}
+        <Stack.Screen name="Categories" component={Categories}
           options={({ route }) => ({
             title: 'News Categories',
             headerStyle: {

@@ -6,7 +6,7 @@ import { LANGUAGES } from '../../utils/Enums';
 import Colors from '../../utils/Colors';
 
 
-export default class NewsByCategory extends Component {
+export default class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,19 +16,19 @@ export default class NewsByCategory extends Component {
 
 
     async componentDidMount() {
-        try {
-            const { route } = this.props
-            const { category } = route.params
-            const news = await Api.GetNews({ categories: category, languages: LANGUAGES.ENGLISH })
-            console.log("Categories -> componentDidMount -> news", news)
-            if (news.error) {
-                throw new Error(news.error.message)
-            }
-            this.setState({ news: news.data })
-        } catch (error) {
-            console.log("NewsByCategory -> componentDidMount -> error", error)
+        // try {
+        //     const { route } = this.props
+        //     const { category } = route.params
+        //     const news = await Api.GetNews({ categories: category, languages: LANGUAGES.ENGLISH })
+        //     console.log("Categories -> componentDidMount -> news", news)
+        //     if (news.error) {
+        //         throw new Error(news.error.message)
+        //     }
+        //     this.setState({ news: news.data })
+        // } catch (error) {
+        //     console.log("NewsByCategory -> componentDidMount -> error", error)
             this.setState({ news: [] })
-        }
+        // }
     }
 
     renderNewsCardItem = ({ item, index }) => (<NewsCard {...item} {...this.props} />)
@@ -45,7 +45,7 @@ export default class NewsByCategory extends Component {
                         renderItem={this.renderNewsCardItem} />
                     :
                     <NoResults />
-                    : <Loader />
+                    : <Loader color={'#FFF'} />
                 }
             </>
         )
