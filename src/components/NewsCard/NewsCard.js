@@ -1,33 +1,23 @@
 import React, { Component } from 'react'
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import { Card, Title, TouchableRipple, Avatar } from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
-export default class NewsCard extends Component {
+const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
-
-    render() {
-        const { category, image, navigation } = this.props
-        return (
-            <TouchableRipple
-                onPress={() => navigation.navigate('NewsByCategory', { category })}
-                rippleColor="rgba(0, 0, 0, .32)"
-            >
-                <Card>
-                    <Card.Content>
-                        <View style={styles.cardView}>
-                            <Avatar.Image
-                                size={45}
-                                style={styles.avatar}
-                                source={{ uri: image || 'https://cdn4.iconfinder.com/data/icons/basics-set-2/100/Question-512.png' }}
-                            />
-                            <Title>{category}</Title>
-                        </View>
-                    </Card.Content>
-                </Card>
-            </TouchableRipple>
-        )
-    }
-}
+const NewsCard = ({title,description}) => (
+    <Card>
+        {/* <Card.Title title={title} subtitle="Card Subtitle" left={LeftContent} /> */}
+        <Card.Content>
+            <Title>{title}</Title>
+            <Paragraph>{description}</Paragraph>
+        </Card.Content>
+        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+        <Card.Actions>
+            <Button>Cancel</Button>
+            <Button>Ok</Button>
+        </Card.Actions>
+    </Card>
+);
 
 const styles = StyleSheet.create({
     cardView: {
@@ -38,3 +28,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
 });
+
+export default NewsCard
