@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         marginTop: '66%',
     },
     noResults: {
-        color: Colors.purple,
+        color: Colors.grey_green,
         fontSize: 32,
         textAlign: 'center',
     }

@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import Api from '../../utils/Api';
 import { Loader, NewsCard, NoResults } from '../../components';
 import { LANGUAGES } from '../../utils/Enums';
+import Colors from '../../utils/Colors';
 
 
 export default class NewsByCategory extends Component {
@@ -26,6 +27,7 @@ export default class NewsByCategory extends Component {
             this.setState({ news: news.data })
         } catch (error) {
             console.log("NewsByCategory -> componentDidMount -> error", error)
+            this.setState({ news: [] })
         }
     }
 
@@ -37,12 +39,13 @@ export default class NewsByCategory extends Component {
             <>
                 {news ? news.length ?
                     <FlatList
+                        style={styles.cardsContainer}
                         data={news}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={this.renderNewsCardItem} />
                     :
-                    <Loader color={'#FFF'} />
-                    : <NoResults />
+                    <NoResults />
+                    : <Loader color={'#FFF'} />
                 }
             </>
         )
@@ -50,5 +53,8 @@ export default class NewsByCategory extends Component {
 }
 
 const styles = StyleSheet.create({
-
+    cardsContainer: {
+        backgroundColor: Colors.off_white,
+        paddingTop: 16,
+    },
 });
