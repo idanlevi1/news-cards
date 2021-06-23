@@ -15,3 +15,18 @@ export const LANGUAGES = {
     CHINESE: 'zh',
     RUSSIAN: 'ru',
 }
+
+export const COUNTRY = {
+    USA: 'us',
+    ISRAEL: 'he',
+    GERMANY: 'de',
+    SPAIN: 'es',
+    FRANCE: 'fr',
+    CHINA: 'zh',
+    RUSSIA: 'ru',
+}
+
+export const SORT_NEWS = {
+    POPULARITY: 'popularity',
+    DATE: 'published_desc',
+}

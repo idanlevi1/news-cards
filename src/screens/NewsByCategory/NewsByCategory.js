@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Api from '../../utils/Api';
 import { Loader, NewsCard, NoResults } from '../../components';
-import { LANGUAGES } from '../../utils/Enums';
+import { LANGUAGES, SORT_NEWS, COUNTRY } from '../../utils/Enums';
 import Colors from '../../utils/Colors';
 
 
@@ -19,7 +19,7 @@ export default class NewsByCategory extends Component {
         try {
             const { route } = this.props
             const { category } = route.params
-            const news = await Api.GetNews({ categories: category, languages: LANGUAGES.ENGLISH })
+            const news = await Api.GetNews({ categories: category, languages: LANGUAGES.ENGLISH, countries: COUNTRY.USA, sort: SORT_NEWS.POPULARITY })
             console.log("Categories -> componentDidMount -> news", news)
             if (news.error) {
                 throw new Error(news.error.message)
