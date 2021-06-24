@@ -95,7 +95,7 @@ export default class NewsByCategory extends Component {
                 }
 
                 <Modal
-                    isVisible={isModalVisible}
+                    isVisible={!!isModalVisible}
                     onSwipeComplete={() => this.setState({ isModalVisible: false })}
                     swipeDirection="left"
                 >
