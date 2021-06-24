@@ -1,0 +1,51 @@
+[
+    {
+        "id": "us",
+        "name": "United States",
+        "symbol": "us",
+        "icon": "🇺🇸",
+        "language": "en"
+    },
+    {
+        "id": "il",
+        "name": "Israel",
+        "symbol": "il",
+        "icon": "🇮🇱",
+        "language": "en"
+    },
+    {
+        "id": "de",
+        "name": "Germany",
+        "symbol": "de",
+        "icon": "🇩🇪",
+        "language": "de"
+    },
+    {
+        "id": "fr",
+        "name": "France",
+        "symbol": "fr",
+        "icon": "🇫🇷",
+        "language": "fr"
+    },
+    {
+        "id": "it",
+        "name": "Italy",
+        "symbol": "it",
+        "icon": "🇮🇹",
+        "language": "it"
+    },
+    {
+        "id": "cn",
+        "name": "China",
+        "symbol": "cn",
+        "icon": "🇨🇳",
+        "language": "zh"
+    },
+    {
+        "id": "pt",
+        "name": "Portugal",
+        "symbol": "pt",
+        "icon": "🇵🇹",
+        "language": "pt"
+    }
+]

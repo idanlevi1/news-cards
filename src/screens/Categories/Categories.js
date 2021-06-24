@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList } from "react-native";
 import { NewsCategoryCard } from '../../components';
-import newsCategoriesListUS from '../../data/news_categories_us.json';
+import { NewsCategoriesData } from '../../data';
 
 
 export default class Categories extends Component {
@@ -11,7 +11,7 @@ export default class Categories extends Component {
     render() {
         return (
             <FlatList
-                data={newsCategoriesListUS}
+                data={NewsCategoriesData}
                 keyExtractor={(item, index) => item.category}
                 renderItem={this.renderCategoryItem} />
         )

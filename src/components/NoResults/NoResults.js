@@ -3,10 +3,10 @@ import { View, StyleSheet } from 'react-native';
 import Colors from '../../utils/Colors';
 import { Headline } from 'react-native-paper';
 
-function NoResults({ text = 'No Results :(' }) {
+function NoResults({ text }) {
     return (
         <View style={styles.noResultsContainer}>
-            <Headline style={styles.noResults}>{text}</Headline>
+            <Headline style={styles.noResults}>{text || 'No Results 😔'}</Headline>
         </View>
     )
 }

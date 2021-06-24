@@ -5,8 +5,10 @@ import Colors from '../../utils/Colors';
 function Loader({ text = 'Loading...', color = Colors.black, size = 'large' }) {
     return (
         <View style={styles.container}>
-            <ActivityIndicator color={color} size={size} />
-            <Text style={styles.textLoader}>{text}</Text>
+            <View style={styles.containerLoader}>
+                <ActivityIndicator color={color} size={size} />
+                <Text style={styles.textLoader}>{text}</Text>
+            </View>
         </View>
     )
 }
@@ -14,7 +16,9 @@ function Loader({ text = 'Loading...', color = Colors.black, size = 'large' }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.light_green,
+        flex: .9
+    },
+    containerLoader: {
         position: 'absolute',
         top: 0,
         left: 0,

@@ -10,20 +10,15 @@ export const LANGUAGES = {
     ENGLISH: 'en',
     HEBREW: 'he',
     GERMAN: 'de',
-    SPANISH: 'es',
     FRENCH: 'fr',
+    ITALIAN: 'it',
     CHINESE: 'zh',
-    RUSSIAN: 'ru',
+    PORTUGUESE: 'pt',
 }
 
-export const COUNTRY = {
-    USA: 'us',
-    ISRAEL: 'he',
-    GERMANY: 'de',
-    SPAIN: 'es',
-    FRANCE: 'fr',
-    CHINA: 'zh',
-    RUSSIA: 'ru',
+export const NEWS_PICKER_TYPE = {
+    COUNTRIES: 'countries',
+    SORT: 'sort',
 }
 
 export const SORT_NEWS = {
