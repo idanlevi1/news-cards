@@ -4,11 +4,19 @@ import { Card, Headline, Caption, TouchableRipple } from 'react-native-paper';
 import Colors from '../../utils/Colors';
 import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewsToFavorites, removeNewsFromFavorites } from '../../store/newsStore/newsStore.actions';
+import { favoritesSelector } from '../../store/newsStore/newsStore.selectors';
 
 const noImageAvailable = 'https://www.bengi.nl/wp-content/uploads/2014/10/no-image-available1.png'
 
 const NewsCard = (props) => {
-    const { title, description, image, source, published_at, navigation } = props
+    const { article, navigation } = props
+    const { title, description, image, source, published_at, } = props.article
+    const dispatch = useDispatch();
+    const favorites = useSelector(favoritesSelector);
+    const isInFavorites = favorites.findIndex(f => f.title === title) !== -1
+
     return (
         <Card style={styles.cardContainer}>
             <TouchableRipple
@@ -17,7 +25,9 @@ const NewsCard = (props) => {
             >
                 <>
                     <Card.Cover source={{ uri: image || noImageAvailable }} style={styles.image} />
-                    <TouchableOpacity style={styles.favoriteIcon} onPress={() => { }}><MaterialCommunityIcons name="heart" color={'#ddd'} size={34} /></TouchableOpacity>
+                    <TouchableOpacity style={styles.favoriteIcon} onPress={() => { dispatch(!isInFavorites ? addNewsToFavorites(article) : removeNewsFromFavorites(title)) }}>
+                        <MaterialCommunityIcons name="heart" color={isInFavorites ? Colors.dark_pink : Colors.dark_grey} size={34} />
+                    </TouchableOpacity>
                     <Card.Content>
                         <Headline style={styles.title} numberOfLines={3}>{title}</Headline>
                         <View style={styles.sourceAndDate}>

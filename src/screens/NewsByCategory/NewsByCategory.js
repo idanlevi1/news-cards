@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { FlatList, StyleSheet, Text, View, Dimensions, Platform, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Api from '../../utils/Api';
-import { Loader, NewsCard, NoResults } from '../../components';
-import { LANGUAGES, SORT_NEWS, NEWS_PICKER_TYPE } from '../../utils/Enums';
+import { Loader, NoResults, NewsCardList } from '../../components';
+import { NEWS_PICKER_TYPE } from '../../utils/Enums';
 import Colors from '../../utils/Colors';
 import Modal from 'react-native-modal';
-import { Button } from 'react-native-paper';
 import { NewsCountriesData, NewsSortTypesData } from '../../data';
+import { connect } from 'react-redux';
 
-export default class NewsByCategory extends Component {
+class NewsByCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,8 +57,6 @@ export default class NewsByCategory extends Component {
         }
     }
 
-    renderNewsCardItem = ({ item, index }) => (<NewsCard {...item} {...this.props} />)
-
     renderOption = ({ item, index }) => {
         const { isModalVisible, country, sortType } = this.state
         const stateItem = isModalVisible == NEWS_PICKER_TYPE.COUNTRIES ? country : sortType
@@ -84,11 +82,7 @@ export default class NewsByCategory extends Component {
                 </View>
 
                 {!isLoading ? news.length ?
-                    <FlatList
-                        style={styles.cardsContainer}
-                        data={news}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={this.renderNewsCardItem} />
+                    <NewsCardList news={news} navigation={this.props.navigation} />
                     :
                     <NoResults text={error || null} />
                     : <Loader />
@@ -120,15 +114,32 @@ export default class NewsByCategory extends Component {
     }
 }
 
+
+const mapStateToProps = (state) => {
+    console.log("mapStateToProps -> state", state)
+    return {
+        NewsStore: state.news
+    };
+};
+//  const mapDispatchToProps = (dispatch) => {
+//     return {
+//        increment: () => dispatch(increment()),
+//        decrement: () => dispatch(decrement()),
+//        reset: () => dispatch(reset())
+//     };
+//  };
+
+export default connect(mapStateToProps, null)(NewsByCategory);
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.white,
     },
-    cardsContainer: {
-        paddingTop: 16,
-    },
     pickersLine: {
-        marginTop: 12,
+        paddingTop: 10,
+        paddingBottom: 8,
+        borderBottomWidth: .3,
+        borderBottomColor: Colors.grey_green,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'

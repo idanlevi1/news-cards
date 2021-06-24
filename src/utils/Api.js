@@ -3,10 +3,11 @@ import { URLS, KEYS } from './Enums';
 
 
 class Api {
-    constructor() { }
-    // request structure : (auth, path, method, body, params, file)
+    constructor() {
+        this.newsUrl = `${URLS.NEWS}?access_key=${KEYS.NEWS_URL_ACCESS_KEYS}`
+    }
     GetNews(params) {
-        return Rest(`${URLS.NEWS}?access_key=${KEYS.NEWS_URL_ACCESS_KEYS}`, params)
+        return Rest(this.newsUrl, params)
     }
 }
 
