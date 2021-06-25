@@ -13,6 +13,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A1B444ACF142F9CD9CDBF3AE /* libPods-NewsCards.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A9473F11E1C6E9E3F37E9C /* libPods-NewsCards.a */; };
+		A6337AC52685D2530039C232 /* Walk with me now.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337AC02685D2520039C232 /* Walk with me now.ttf */; };
+		A6337AC62685D2530039C232 /* Alice-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337AC12685D2530039C232 /* Alice-Regular.ttf */; };
+		A6337AC72685D2530039C232 /* OptimusPrincepsSemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337AC22685D2530039C232 /* OptimusPrincepsSemiBold.ttf */; };
+		A6337AC82685D2530039C232 /* OptimusPrinceps.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337AC32685D2530039C232 /* OptimusPrinceps.ttf */; };
+		A6337AC92685D2530039C232 /* Quattrocento-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337AC42685D2530039C232 /* Quattrocento-Regular.ttf */; };
+		A6337AD02685D4CB0039C232 /* KBYoureJustMyTypeThin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337ACE2685D4CB0039C232 /* KBYoureJustMyTypeThin.ttf */; };
+		A6337AD12685D4CB0039C232 /* KBYoureJustMyType.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6337ACF2685D4CB0039C232 /* KBYoureJustMyType.ttf */; };
 		FE967FC548F8D46B97FEE518 /* libPods-NewsCards-NewsCardsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD1C0A1D904BC3EDB13680E /* libPods-NewsCards-NewsCardsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +49,13 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = NewsCards/main.m; sourceTree = "<group>"; };
 		6FD6E4B50F12D93292608674 /* Pods-NewsCards-NewsCardsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsCards-NewsCardsTests.debug.xcconfig"; path = "Target Support Files/Pods-NewsCards-NewsCardsTests/Pods-NewsCards-NewsCardsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = NewsCards/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A64A3B562684BFD10072E18A /* NewsCards-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewsCards-Bridging-Header.h"; sourceTree = "<group>"; };
+		A6337AC02685D2520039C232 /* Walk with me now.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Walk with me now.ttf"; path = "Resources/Walk with me now.ttf"; sourceTree = "<group>"; };
+		A6337AC12685D2530039C232 /* Alice-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Alice-Regular.ttf"; path = "Resources/Alice-Regular.ttf"; sourceTree = "<group>"; };
+		A6337AC22685D2530039C232 /* OptimusPrincepsSemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OptimusPrincepsSemiBold.ttf; path = Resources/OptimusPrincepsSemiBold.ttf; sourceTree = "<group>"; };
+		A6337AC32685D2530039C232 /* OptimusPrinceps.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OptimusPrinceps.ttf; path = Resources/OptimusPrinceps.ttf; sourceTree = "<group>"; };
+		A6337AC42685D2530039C232 /* Quattrocento-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quattrocento-Regular.ttf"; path = "Resources/Quattrocento-Regular.ttf"; sourceTree = "<group>"; };
+		A6337ACE2685D4CB0039C232 /* KBYoureJustMyTypeThin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KBYoureJustMyTypeThin.ttf; path = "../../../../Downloads/kb-you-re-just-my-type/KBYoureJustMyTypeThin.ttf"; sourceTree = "<group>"; };
+		A6337ACF2685D4CB0039C232 /* KBYoureJustMyType.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KBYoureJustMyType.ttf; path = "../../../../Downloads/kb-you-re-just-my-type/KBYoureJustMyType.ttf"; sourceTree = "<group>"; };
 		B0A9473F11E1C6E9E3F37E9C /* libPods-NewsCards.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsCards.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -93,7 +106,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				A64A3B562684BFD10072E18A /* NewsCards-Bridging-Header.h */,
 			);
 			name = NewsCards;
 			sourceTree = "<group>";
@@ -129,6 +141,13 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A6337ACF2685D4CB0039C232 /* KBYoureJustMyType.ttf */,
+				A6337ACE2685D4CB0039C232 /* KBYoureJustMyTypeThin.ttf */,
+				A6337AC12685D2530039C232 /* Alice-Regular.ttf */,
+				A6337AC32685D2530039C232 /* OptimusPrinceps.ttf */,
+				A6337AC22685D2530039C232 /* OptimusPrincepsSemiBold.ttf */,
+				A6337AC42685D2530039C232 /* Quattrocento-Regular.ttf */,
+				A6337AC02685D2520039C232 /* Walk with me now.ttf */,
 				13B07FAE1A68108700A75B9A /* NewsCards */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* NewsCardsTests */,
@@ -202,7 +221,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -244,6 +263,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6337AD02685D4CB0039C232 /* KBYoureJustMyTypeThin.ttf in Resources */,
+				A6337AD12685D4CB0039C232 /* KBYoureJustMyType.ttf in Resources */,
+				A6337AC52685D2530039C232 /* Walk with me now.ttf in Resources */,
+				A6337AC62685D2530039C232 /* Alice-Regular.ttf in Resources */,
+				A6337AC72685D2530039C232 /* OptimusPrincepsSemiBold.ttf in Resources */,
+				A6337AC82685D2530039C232 /* OptimusPrinceps.ttf in Resources */,
+				A6337AC92685D2530039C232 /* Quattrocento-Regular.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -432,13 +458,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6FD6E4B50F12D93292608674 /* Pods-NewsCards-NewsCardsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = NewsCardsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,10 +486,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0803AA13C0FF4D4AD41AE808 /* Pods-NewsCards-NewsCardsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = NewsCardsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -580,7 +608,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -638,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

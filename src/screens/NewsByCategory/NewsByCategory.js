@@ -7,6 +7,7 @@ import Colors from '../../utils/Colors';
 import Modal from 'react-native-modal';
 import { NewsCountriesData, NewsSortTypesData } from '../../data';
 import { connect } from 'react-redux';
+import Fonts from '../../utils/Fonts';
 
 class NewsByCategory extends Component {
     constructor(props) {
@@ -106,7 +107,9 @@ class NewsByCategory extends Component {
                             style={styles.filtersListHolder}
                             data={isModalVisible == NEWS_PICKER_TYPE.COUNTRIES ? NewsCountriesData : NewsSortTypesData}
                             keyExtractor={(item, index) => index.toString()}
-                            renderItem={this.renderOption} />
+                            renderItem={this.renderOption} 
+                            initialNumToRender={5}
+                            />
                     </View>
                 </Modal>
             </>
@@ -155,7 +158,8 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     pickerText: {
-        fontSize: 18,
+        fontSize: 16,
+        fontFamily: Fonts.KBWriterThin,
         textAlign: 'center'
     },
     modalHolder: {
@@ -174,8 +178,9 @@ const styles = StyleSheet.create({
     modalHeaderTitle: {
         fontWeight: '500',
         color: Colors.black,
-        fontSize: 24,
+        fontSize: 22,
         lineHeight: 26,
+        fontFamily: Fonts.KBWriter,
     },
     modalCloseButton: {
         position: 'absolute',
@@ -213,5 +218,6 @@ const styles = StyleSheet.create({
     optionText: {
         color: Colors.black,
         fontSize: 22,
+        fontFamily: Fonts.KBWriterThin
     },
 });

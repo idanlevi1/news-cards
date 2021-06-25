@@ -7,6 +7,7 @@ import { Button, IconButton } from 'react-native-paper';
 import Colors from '../utils/Colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Fonts from '../utils/Fonts';
 
 const Stack = createStackNavigator();
 
@@ -21,11 +22,13 @@ function NewsStackNavigator() {
             return ({
               title: 'News Categories',
               headerStyle: {
-                backgroundColor: '#f4511e',
+                backgroundColor: Colors.dark_pink,
               },
               headerTintColor: '#fff',
               headerTitleStyle: {
-                fontWeight: 'bold',
+                fontFamily: Fonts.Walk,
+              alignSelf: 'center',
+              paddingRight: '10%'
               },
               headerRight: () => (
                 <TouchableOpacity style={{ marginRight: 10, padding: 1 }} onPress={() => { props.navigation.navigate('Favorites') }}><MaterialCommunityIcons name="star" color={'yellow'} size={38} /></TouchableOpacity>
@@ -39,33 +42,39 @@ function NewsStackNavigator() {
           options={({ route }) => ({
             title: route.params.category,
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: Colors.dark_pink,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontFamily: Fonts.Walk,
+              alignSelf: 'center',
+              paddingRight: '10%'
             },
           })} />
         <Stack.Screen name="Article" component={Article}
           options={({ route }) => ({
-            title: route.params.title,
+            title: 'Article',
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: Colors.dark_pink,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontFamily: Fonts.Walk,
+              alignSelf: 'center',
+              paddingRight: '10%'
             },
           })} />
         <Stack.Screen name="Favorites" component={Favorites}
           options={({ route }) => ({
             title: route.params ?.title || 'Favorites',
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: Colors.dark_pink,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontFamily: Fonts.Walk,
+              alignSelf: 'center',
+              paddingRight: '10%'
             },
           })} />
       </Stack.Navigator>

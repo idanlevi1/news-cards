@@ -38,7 +38,7 @@ const Favorites = (props) => {
 
 const styles = StyleSheet.create({
     toolBarLine: {
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.dark_pink,
         paddingTop: 10,
         paddingBottom: 8,
         borderBottomWidth: .3,

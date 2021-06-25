@@ -1,51 +1,46 @@
-import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import Api from '../../utils/Api';
-import { Avatar, Button, Card, Title, Paragraph, Subheading, Caption, TouchableRipple } from 'react-native-paper';
+import React from 'react'
+import { ScrollView, StyleSheet, View } from "react-native";
+import { Card, Title, Subheading, Caption } from 'react-native-paper';
 import Colors from '../../utils/Colors';
 import moment from 'moment';
+import { FavoriteIcon } from '../../components';
+import { capitalizeFirstLetter } from '../../utils/Tools';
+import Fonts from '../../utils/Fonts';
 
 
-export default class Article extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            news: null
-        };
-    }
-
-    render() {
-        const { route } = this.props
-        const { title, description, image, source, category, published_at, author } = route.params
-        console.log("Article -> render -> route.params", route.params)
-        return (
-            <View style={styles.cardContainer}>
-                <ScrollView style={styles.container}>
-                    <Card.Content>
+const Article = (props) => {
+    const { route } = props
+    const { article } = route.params
+    console.log("Article -> article", article)
+    const { title, description, image, source, category, published_at, author } = article
+    return (
+        <View style={styles.cardContainer}>
+            <ScrollView style={styles.container}>
+                <Card.Content>
+                    <View style={styles.titleLine}>
                         <Title style={styles.title} >{title}</Title>
-                        <Caption tyle={styles.sourceText}>{source}</Caption>
-                        <Caption tyle={styles.sourceText}>{category}</Caption>
-                        {author ? <Caption>{author}</Caption> : <React.Fragment />}
-                        <Caption >{moment(published_at).format("DD.MM.YYYY")}</Caption>
-                        {image ? <Card.Cover source={{ uri: image }} style={styles.image} /> : <React.Fragment />}
-                        {description ? <Subheading>{description}</Subheading> : <React.Fragment />}
-
-                    </Card.Content>
-                    <Card.Actions>
-                        <Button>Cancel</Button>
-                        <Button>Ok</Button>
-                    </Card.Actions>
-                </ScrollView>
-            </View>
-        )
-    }
+                        <FavoriteIcon article={article} style={styles.favoriteIcon} />
+                    </View>
+                    <Caption style={styles.subtitles}>{source}</Caption>
+                    <Caption style={styles.subtitles}>{`Category: ${capitalizeFirstLetter(category)}`}</Caption>
+                    <View style={styles.sourceAndDate}>
+                        <Caption style={styles.subtitles}>{moment(published_at).format("DD.MM.YYYY")}</Caption>
+                        {author ? <Caption style={styles.subtitles}>{`Author: ${author}`}</Caption> : <React.Fragment />}
+                    </View>
+                    {image ? <Card.Cover source={{ uri: image }} style={styles.image} /> : <React.Fragment />}
+                    {description ? <Subheading style={styles.description}>{description}</Subheading> : <React.Fragment />}
+                </Card.Content>
+            </ScrollView>
+        </View>
+    )
 }
+
+export default Article
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.off_white,
         padding: 12
-
     },
     cardContainer: {
         flex: 1,
@@ -54,7 +49,13 @@ const styles = StyleSheet.create({
         fontSize: 23,
         lineHeight: 26,
         paddingTop: 14,
-        paddingBottom: 3
+        paddingBottom: 8,
+        fontFamily: Fonts.OptimusBold,
+        width: '90%',
+    },
+    titleLine: {
+        flexDirection: 'row',
+        alignItems: 'flex-start'
     },
     sourceAndDate: {
         flexDirection: 'row-reverse',
@@ -63,5 +64,20 @@ const styles = StyleSheet.create({
     },
     image: {
         marginVertical: 20,
+    },
+    subtitles: {
+        fontFamily: Fonts.Optimus,
+        fontSize: 14
+    },
+    description: {
+        fontFamily: Fonts.Optimus,
+        fontSize: 20
+    },
+    favoriteIcon: {
+        borderRadius: 50,
+        backgroundColor: 'rgba(0, 0, 0, .3)',
+        zIndex: 9,
+        padding: 7,
+        marginTop: 15
     }
 });

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image } from "react-native";
 import { Card, Title, TouchableRipple } from 'react-native-paper';
 import Colors from '../../utils/Colors';
+import Fonts from '../../utils/Fonts';
 
 export default class NewsCategoryCard extends Component {
 
@@ -34,23 +35,22 @@ export default class NewsCategoryCard extends Component {
 const styles = StyleSheet.create({
     cardContent: {
         borderBottomWidth: .5,
-        borderBottomColor: Colors.grey_green
+        borderBottomColor: Colors.grey_green,
     },
     cardView: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     avatar: {
-        borderTopRightRadius: 32,
-        borderBottomRightRadius: 4,
-        borderBottomLeftRadius: 4,
-        borderTopLeftRadius: 4,
-        marginHorizontal: 12,
-        width: 65,
-        height: 65,
+        borderRadius: 35,
+        marginHorizontal: 10,
+        width: 56,
+        height: 56,
     },
     text: {
         color: Colors.black,
-        fontSize: 22,
+        fontSize: 20,
+        paddingLeft: 5,
+        fontFamily: Fonts.KBWriter
     }
 });

@@ -1,21 +1,16 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Card, Headline, Caption, TouchableRipple } from 'react-native-paper';
-import Colors from '../../utils/Colors';
 import moment from 'moment';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useDispatch, useSelector } from 'react-redux';
-import { addNewsToFavorites, removeNewsFromFavorites } from '../../store/newsStore/newsStore.actions';
-import { favoritesSelector } from '../../store/newsStore/newsStore.selectors';
+import Fonts from '../../utils/Fonts';
+import Colors from '../../utils/Colors';
+import { FavoriteIcon } from '..';
 
 const noImageAvailable = 'https://www.bengi.nl/wp-content/uploads/2014/10/no-image-available1.png'
 
 const NewsCard = (props) => {
     const { article, navigation } = props
-    const { title, description, image, source, published_at, } = props.article
-    const dispatch = useDispatch();
-    const favorites = useSelector(favoritesSelector);
-    const isInFavorites = favorites.findIndex(f => f.title === title) !== -1
+    const { title, image, source, published_at, } = props.article
 
     return (
         <Card style={styles.cardContainer}>
@@ -24,10 +19,8 @@ const NewsCard = (props) => {
                 rippleColor={Colors.black_opacity}
             >
                 <>
-                    <Card.Cover source={{ uri: image || noImageAvailable }} style={styles.image} />
-                    <TouchableOpacity style={styles.favoriteIcon} onPress={() => { dispatch(!isInFavorites ? addNewsToFavorites(article) : removeNewsFromFavorites(title)) }}>
-                        <MaterialCommunityIcons name="heart" color={isInFavorites ? Colors.dark_pink : Colors.dark_grey} size={34} />
-                    </TouchableOpacity>
+                    <Image transition={false} opacity={0.85} source={{ uri: image || noImageAvailable, cache: "force-cache" }} style={styles.image} />
+                    <FavoriteIcon article={article} />
                     <Card.Content>
                         <Headline style={styles.title} numberOfLines={3}>{title}</Headline>
                         <View style={styles.sourceAndDate}>
@@ -55,7 +48,8 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         fontWeight: '500',
         paddingBottom: 3,
-        width: '90%'
+        width: '90%',
+        fontFamily: Fonts.OptimusBold
     },
     sourceAndDate: {
         flexDirection: 'row-reverse',
@@ -70,16 +64,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
     },
-    favoriteIcon: {
-        position: 'absolute',
-        alignItems: 'center',
-        top: 127,
-        right: 5,
-        borderRadius: 50,
-        backgroundColor: 'rgba(0, 0, 0, .3)',
-        zIndex: 9,
-        padding: 7
-    }
 });
 
 export default NewsCard
