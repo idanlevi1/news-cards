@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NewsCards</string>
+    <string name="facebook_app_id">222539876370766</string>
+    <string name="fb_login_protocol_scheme">fb222539876370766</string>
 </resources>
