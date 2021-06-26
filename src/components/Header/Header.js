@@ -1,31 +1,63 @@
-import React, { Component } from 'react'
-import { ImageBackground, StyleSheet, Text } from "react-native";
+import React from 'react'
+import { TouchableOpacity, View, StyleSheet, Text, Image } from 'react-native';
+import { isUserConnectedSelector, getUserDataSelector } from '../../store/userStore/userStore.selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import Colors from '../../utils/Colors';
+import { loginModalVisible } from '../../store/userStore/userStore.actions';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class Header extends Component {
+const Header = (props) => {
+    const dispatch = useDispatch();
+    const isUserConnected = useSelector(isUserConnectedSelector);
+    const userData = useSelector(getUserDataSelector);
 
-    render() {
-        const { imgUrl, title = '' } = this.props
-        const image = { uri: imgUrl || "https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" };
+    if (props.side == 'right') {
         return (
-            <ImageBackground source={image} style={styles.image}>
-                <Text style={styles.text}>{title}</Text>
-            </ImageBackground>
+            isUserConnected ?
+                <View style={styles.rightSideContainer}>
+                    <Image
+                        resizeMode={'cover'}
+                        style={{ width: 30, height: 30, borderRadius: 35 }}
+                        source={{ uri: userData.image || 'https://cdn4.iconfinder.com/data/icons/basics-set-2/100/Question-512.png' }}
+                        opacity={0.85}
+                    />
+                    <Text style={styles.text}>{userData.name}</Text>
+                </View> :
+                (
+                    <TouchableOpacity style={styles.rightSideContainer} onPress={() => dispatch(loginModalVisible(true))}>
+                        <MaterialCommunityIcons name="login" color={Colors.white} size={25} />
+                        <Text style={styles.text}>{'Login'}</Text>
+                    </TouchableOpacity>
+                )
+        )
+    } else {
+        if (!isUserConnected) {
+            return <View />
+        }
+        return (
+            <TouchableOpacity style={styles.leftSideContainer} onPress={() => dispatch(loginModalVisible(true))}>
+                <MaterialCommunityIcons name="logout" color={Colors.white} size={25} />
+                <Text style={styles.text}>{'Logout'}</Text>
+            </TouchableOpacity>
         )
     }
 }
 
 
+
 const styles = StyleSheet.create({
-    image: {
-        resizeMode: "cover",
-        justifyContent: "center",
-        height: 200
+    rightSideContainer: {
+        alignItems: 'center',
+        paddingRight: 13
+    },
+    leftSideContainer: {
+        alignItems: 'center',
+        paddingLeft: 13
     },
     text: {
-        color: "white",
-        fontSize: 52,
-        fontWeight: "bold",
-        textAlign: "center",
-        backgroundColor: "#000000a0"
+        color: Colors.white,
+        fontSize: 12,
     }
 });
+
+export default Header

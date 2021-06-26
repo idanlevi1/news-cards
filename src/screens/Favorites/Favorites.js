@@ -9,10 +9,8 @@ import Fonts from '../../utils/Fonts';
 
 
 const Favorites = (props) => {
-    console.log("Favorites -> props", props)
     const dispatch = useDispatch();
     const favorites = useSelector(favoritesSelector);
-    console.log("Favorites -> favorites", favorites)
 
     return (
         <>

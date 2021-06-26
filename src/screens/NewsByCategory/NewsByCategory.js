@@ -91,8 +91,8 @@ class NewsByCategory extends Component {
 
                 <Modal
                     isVisible={!!isModalVisible}
-                    onSwipeComplete={() => this.setState({ isModalVisible: false })}
-                    swipeDirection="left"
+                    onRequestClose={() => this.setState({ isModalVisible: false })}
+                    onBackdropPress={() => this.setState({ isModalVisible: false })}
                 >
                     <View style={styles.modalHolder}>
                         <TouchableOpacity
@@ -108,7 +108,6 @@ class NewsByCategory extends Component {
                             data={isModalVisible == NEWS_PICKER_TYPE.COUNTRIES ? NewsCountriesData : NewsSortTypesData}
                             keyExtractor={(item, index) => index.toString()}
                             renderItem={this.renderOption}
-                            initialNumToRender={5}
                         />
                     </View>
                 </Modal>

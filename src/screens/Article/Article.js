@@ -11,7 +11,6 @@ import Fonts from '../../utils/Fonts';
 const Article = (props) => {
     const { route } = props
     const { article } = route.params
-    console.log("Article -> article", article)
     const { title, description, image, source, category, published_at, author } = article
     return (
         <>

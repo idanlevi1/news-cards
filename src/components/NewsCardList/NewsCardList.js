@@ -10,6 +10,7 @@ const NewsCardList = (props) => {
         <FlatList
             style={styles.cardsContainer}
             data={props.news}
+            initialNumToRender={5}
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderNewsCardItem} />
     )

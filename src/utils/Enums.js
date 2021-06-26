@@ -6,6 +6,13 @@ export const KEYS = {
     NEWS_URL_ACCESS_KEYS: 'c3fffbd6b15ead2641bca70893a62611'
 }
 
+export const SCREENS = {
+    CATEGORIES: 'Categories',
+    NEWS_BY_CATEGORY: 'NewsByCategory',
+    FAVORITES: 'Favorites',
+    ARTICLE: 'Article',
+}
+
 export const LANGUAGES = {
     ENGLISH: 'en',
     HEBREW: 'he',

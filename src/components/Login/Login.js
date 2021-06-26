@@ -1,35 +1,21 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {
-    LoginManager,
-    GraphRequest,
-    GraphRequestManager,
-    AccessToken,
-} from 'react-native-fbsdk';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import {
-    TouchableOpacity,
-    StyleSheet,
-    ActivityIndicator,
-    Dimensions,
-    Text,
-    View,
-} from 'react-native';
+import { LoginManager, GraphRequest, GraphRequestManager, AccessToken } from 'react-native-fbsdk';
+import { useDispatch, useSelector } from 'react-redux';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { Loader } from '..';
 import Colors from '../../utils/Colors';
 import Fonts from '../../utils/Fonts';
-import { loginModalVisible, loginUser } from '../../store/userStore/userStore.actions';
-import { isLoginModalVisibleSelector } from '../../store/userStore/userStore.selectors';
+import { loginModalVisible, loginUser, logoutUser } from '../../store/userStore/userStore.actions';
+import { isLoginModalVisibleSelector, isUserConnectedSelector } from '../../store/userStore/userStore.selectors';
 import Modal from 'react-native-modal';
-
-const { width } = Dimensions.get('window');
-
 
 const Login = (props) => {
     const dispatch = useDispatch();
     const isModalVisible = useSelector(isLoginModalVisibleSelector);
-    console.log("Login -> isModalVisible", isModalVisible)
+    const isUserConnected = useSelector(isUserConnectedSelector);
+
     const [loginState, setLoginState] = useState(null)
+
     const onCloseModal = () => {
         dispatch(loginModalVisible(false))
         setTimeout(() => {
@@ -37,12 +23,19 @@ const Login = (props) => {
         }, 1000)
     }
 
-    const facebookButton = async (props) => {
+    const onLogout = () => {
+        dispatch(logoutUser())
+        dispatch(loginModalVisible(false))
+    }
+
+    const facebookButton = async () => {
+        setLoginState('loading')
         const result = await LoginManager.logInWithPermissions([
             'public_profile',
             'email',
         ]);
         if (result.isCancelled) {
+            setLoginState(null)
         } else {
             const data = await AccessToken.getCurrentAccessToken();
             const responseInfoCallback = (error, res) => {
@@ -51,7 +44,6 @@ const Login = (props) => {
                     setLoginState('An error occurred, please try again later 😔')
                     console.log('Error fetching data: ' + error.toString());
                 } else {
-                    console.log("responseInfoCallback -> { accessToken: data.accessToken, name: res.name, avatar: res.picture.data.url}", { accessToken: data.accessToken, name: res.name, avatar: res.picture.data.url })
                     dispatch(loginUser({ accessToken: data.accessToken, name: res.name, image: res.picture.data.url }))
                     setLoginState("You've logged in successfully! 👏")
                 }
@@ -72,11 +64,47 @@ const Login = (props) => {
         }
     };
 
+    const ModalContent = () => {
+        if (isUserConnected && !loginState) {
+            return (
+                <>
+                    <View style={styles.modalHolderHeader}>
+                        <Text style={styles.modalHeaderTitle}>{'Do you want to log out?'}</Text>
+                    </View>
+                    <View style={styles.logoutContainer}>
+                        <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
+                            <Text style={styles.logoutButtonText}>{'Yes'}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.logoutButton} onPress={onCloseModal}>
+                            <Text style={styles.logoutButtonText}>{'No'}</Text>
+                        </TouchableOpacity>
+                    </View>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <View style={styles.modalHolderHeader}>
+                        <Text style={styles.modalHeaderTitle}>{props.message}</Text>
+                    </View>
+
+                    {!loginState ?
+                        <TouchableOpacity style={styles.facebookLoginButton} onPress={() => facebookButton(props)}>
+                            <Text style={styles.facebookLoginButtonText}>{'Login with Facebook'}</Text>
+                        </TouchableOpacity>
+                        :
+                        loginState == 'loading' ? <View style={styles.loginStateText}><Loader /></View> : <Text style={styles.loginStateText}>{loginState}</Text>
+                    }
+                </>
+            )
+        }
+    }
+
     return (
         <Modal
             isVisible={isModalVisible}
-            onSwipeComplete={onCloseModal}
-            swipeDirection="left"
+            onRequestClose={onCloseModal}
+            onBackdropPress={onCloseModal}
         >
             <View style={styles.modalHolder}>
                 <TouchableOpacity
@@ -84,16 +112,7 @@ const Login = (props) => {
                     onPress={onCloseModal}>
                     <Text style={styles.modalCloseIcon}>𝖷</Text>
                 </TouchableOpacity>
-                <View style={styles.modalHolderHeader}>
-                    <Text style={styles.modalHeaderTitle}>{props.message}</Text>
-                </View>
-                {!loginState ?
-                    <TouchableOpacity style={styles.facebookLoginButton} onPress={() => facebookButton(props)}>
-                        <Text style={styles.facebookLoginButtonText}>{'Login with Facebook'}</Text>
-                    </TouchableOpacity>
-                    :
-                    <Text style={styles.loginStateText}>{loginState}</Text>
-                }
+                <ModalContent />
             </View>
         </Modal>
     );
@@ -105,7 +124,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         overflow: 'hidden',
         paddingTop: 10,
-        alignItems: 'center'
     },
     modalHolderHeader: {
         justifyContent: 'center',
@@ -137,29 +155,6 @@ const styles = StyleSheet.create({
         color: Colors.grey_green,
         fontSize: 24
     },
-    filtersListHolder: {
-        flex: 0,
-        backgroundColor: Colors.off_white
-    },
-    optionContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 46,
-        paddingHorizontal: 8,
-        backgroundColor: Colors.off_white,
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.grey_green,
-    },
-    optionIcon: {
-        color: Colors.black,
-        fontSize: 34,
-        paddingHorizontal: 10,
-    },
-    optionText: {
-        color: Colors.black,
-        fontSize: 22,
-        fontFamily: Fonts.KBWriterThin
-    },
     facebookLoginButton: {
         backgroundColor: '#4267B2',
         borderRadius: 4,
@@ -168,7 +163,8 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         paddingHorizontal: 10,
-        marginVertical: '10%'
+        marginVertical: '10%',
+        alignSelf: 'center'
     },
     facebookLoginButtonText: {
         color: '#FFF',
@@ -182,7 +178,25 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingHorizontal: 10,
         marginVertical: '12%'
-    }
+    },
+    logoutContainer: {
+        flexDirection: 'row',
+        paddingVertical: 25,
+        borderBottomColor: Colors.grey_green,
+        justifyContent: 'space-around',
+    },
+    logoutButton: {
+        borderColor: Colors.black_opacity,
+        backgroundColor: Colors.black_opacity,
+        borderWidth: 1,
+        borderBottomWidth: 2,
+        borderRightWidth: 2,
+        borderRadius: 4,
+        padding: 8,
+    },
+    logoutButtonText: {
+        fontSize: 20,
+    },
 });
 
 export default Login;

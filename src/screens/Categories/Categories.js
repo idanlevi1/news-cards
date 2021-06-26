@@ -10,10 +10,8 @@ import { loginModalVisible } from '../../store/userStore/userStore.actions';
 
 
 const Categories = (props) => {
-    console.log("Categories -> props", props)
     const dispatch = useDispatch();
     const isUserConnected = useSelector(isUserConnectedSelector);
-    console.log("Categories -> isUserConnected", isUserConnected)
     const onNavigateToFavorites = () => {
         if (isUserConnected) {
             props.navigation.navigate('Favorites')
