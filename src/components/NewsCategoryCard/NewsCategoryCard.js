@@ -15,7 +15,7 @@ export default class NewsCategoryCard extends Component {
                 onPress={() => navigation.navigate('NewsByCategory', { category })}
                 rippleColor={Colors.black_opacity}
             >
-                <Card>
+                <Card style={styles.cardContent}>
                     <Card.Content style={styles.cardContent}>
                         <View style={styles.cardView}>
                             <Image
@@ -35,7 +35,7 @@ export default class NewsCategoryCard extends Component {
 
 const styles = StyleSheet.create({
     cardContent: {
-        borderBottomWidth: .5,
+        borderBottomWidth: .3,
         borderBottomColor: Colors.grey_green,
     },
     cardView: {

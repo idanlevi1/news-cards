@@ -3,6 +3,7 @@ export default {
     white: '#ffffff',
     black: '#020203',
     orange: '#f6bd60',
+    yellow: '#f9c74f',
     off_white: '#e8eddf',
     pink: '#f5cac3',
     grey_green: '#84a59d',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
 import { NewsCategoryCard, Login } from '../../components';
 import { NewsCategoriesData } from '../../data';
 import Colors from '../../utils/Colors';
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isUserConnectedSelector } from '../../store/userStore/userStore.selectors';
 import { loginModalVisible } from '../../store/userStore/userStore.actions';
 import posed from 'react-native-pose'
-
+import LinearGradient from 'react-native-linear-gradient';
 
 const PosedComponent = posed.View({
     open: { y: 0, staggerChildren: 125 },
@@ -46,11 +46,11 @@ const Categories = (props) => {
 
     return (
         <>
-            <View style={styles.toolBarLine}>
+            <LinearGradient start={{ x: 1, y: 1 }} end={{ x: 1, y: .7 }} colors={[Colors.white, Colors.yellow]} style={styles.toolBarLine}>
                 <TouchableOpacity style={styles.toolBarButton} onPress={onNavigateToFavorites}>
                     <Text style={styles.toolBarText}>{`Your favorites list ❤️`}{isUserConnected}</Text>
                 </TouchableOpacity>
-            </View>
+            </LinearGradient>
             <PosedComponent pose={poseOpen ? 'open' : 'closed'}>
                 <FlatList
                     data={NewsCategoriesData}
@@ -68,7 +68,7 @@ const Categories = (props) => {
 
 const styles = StyleSheet.create({
     toolBarLine: {
-        backgroundColor: Colors.dark_pink,
+        backgroundColor: Colors.yellow,
         paddingTop: 10,
         paddingBottom: 8,
         borderBottomWidth: .3,

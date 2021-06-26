@@ -11,19 +11,14 @@ export default StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 54,
+    fontSize: 50,
     color: '#FFF',
     fontFamily: Fonts.Walk
   },
   subtitle: {
+    marginTop: 20,
     fontSize: 28,
     color: '#FFF',
     fontFamily: Fonts.OptimusBold
-  },
-  logo: {
-    height: 700 * 0.22,
-    width: 350 * 0.34,
-    position: 'absolute',
-    top: 700 * 0.6,
   },
 })

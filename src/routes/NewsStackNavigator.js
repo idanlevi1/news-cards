@@ -22,7 +22,7 @@ function NewsStackNavigator() {
               return ({
                 title: 'News Categories',
                 headerStyle: {
-                  backgroundColor: Colors.dark_pink,
+                  backgroundColor: Colors.yellow,
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
@@ -40,7 +40,7 @@ function NewsStackNavigator() {
             options={({ route }) => ({
               title: route.params.category,
               headerStyle: {
-                backgroundColor: Colors.dark_pink,
+                backgroundColor: Colors.yellow,
               },
               headerTintColor: '#fff',
               // headerBackTitleVisible: false,
@@ -54,7 +54,7 @@ function NewsStackNavigator() {
             options={({ route }) => ({
               title: 'Article',
               headerStyle: {
-                backgroundColor: Colors.dark_pink,
+                backgroundColor: Colors.yellow,
               },
               headerTintColor: '#fff',
               //  headerBackTitleVisible: false,
@@ -68,7 +68,7 @@ function NewsStackNavigator() {
             options={({ route }) => ({
               title: 'Favorites',
               headerStyle: {
-                backgroundColor: Colors.dark_pink,
+                backgroundColor: Colors.yellow,
               },
               headerTintColor: '#fff',
               headerTitleStyle: {

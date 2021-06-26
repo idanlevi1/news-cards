@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Easing, Text } from 'react-native';
+import { Animated, Easing, Text, Image } from 'react-native';
 import { createAnimation, createInterpolate } from '../../utils/Animation';
 import styles from './Style';
 import LinearGradient from 'react-native-linear-gradient';
@@ -43,7 +43,11 @@ export default class Splash extends React.Component {
     return (
       <LinearGradient start={{ x: 0, y: .01 }} end={{ x: .35, y: .37 }} colors={[Colors.off_white, Colors.orange]} style={styles.linearGradient}>
         <Animated.View style={[styles.container, { opacity: this.state.opacity }]} >
-          <Animated.View style={[{ top: yTitleFall, transform: [{ rotate: spinTitle }] }, { zIndex: 2 }]} >
+          <Animated.View style={[{ alignItems: 'center', top: yTitleFall, transform: [{ rotate: spinTitle }] }, { zIndex: 2 }]} >
+            <Image
+              style={{ width: 100, height: 100 }}
+              source={require('../../images/newspaper.png')}
+            />
             <Text style={styles.title}>News Cards</Text>
           </Animated.View>
           <Animated.View style={[{ left: xSubtitleFall, transform: [{ rotate: spinSubtitle }] }, { zIndex: 2 }]} >
