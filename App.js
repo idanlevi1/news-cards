@@ -5,6 +5,7 @@ import Splash from './src/components/Splash/Splash';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './src/store';
+import Colors from './src/utils/Colors';
 
 const App = () => {
   const [ready, setReady] = React.useState(false)
@@ -16,7 +17,7 @@ const App = () => {
   return (
 
     <>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={Colors.yellow} />
       <Provider store={store}>
         <PersistGate loading={<View />} persistor={persistor}>
           {ready ?
