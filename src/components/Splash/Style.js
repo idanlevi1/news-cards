@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Fonts from '../../utils/Fonts';
 
 export default StyleSheet.create({
   container: {
@@ -10,13 +11,14 @@ export default StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 52,
+    fontSize: 54,
     color: '#FFF',
-    fontWeight: '500',
+    fontFamily: Fonts.Walk
   },
   subtitle: {
-    fontSize: 26,
+    fontSize: 28,
     color: '#FFF',
+    fontFamily: Fonts.OptimusBold
   },
   logo: {
     height: 700 * 0.22,

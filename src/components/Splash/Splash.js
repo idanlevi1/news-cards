@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Easing, Image, Text } from 'react-native';
+import { Animated, Easing, Text } from 'react-native';
 import { createAnimation, createInterpolate } from '../../utils/Animation';
 import styles from './Style';
 import LinearGradient from 'react-native-linear-gradient';
@@ -19,20 +19,14 @@ export default class Splash extends React.Component {
 
   playAnimations = () => {
     Animated.parallel([
-      createAnimation(this.state.opacity, 1, 1500, Easing.ease),
-      createAnimation(this.state.spinAnim, 1, 1000, Easing.ease, 500, false),
-      createAnimation(this.state.yValueTitle, 1, 1200, Easing.cubic, 300, false),
-      createAnimation(this.state.xValueSubtitle, 1, 1000, Easing.linear, 300, false),
+      createAnimation(this.state.opacity, 1, 1200, Easing.ease),
+      createAnimation(this.state.spinAnim, 1, 750, Easing.ease, 300, false),
+      createAnimation(this.state.yValueTitle, 1, 900, Easing.cubic, 150, false),
+      createAnimation(this.state.xValueSubtitle, 1, 700, Easing.linear, 150, false),
     ]).start();
   };
 
-  onHydrateDone = (isHydrateDone) => {
-
-  }
-
   render() {
-    // this.onHydrateDone(this.props.UserStore.isHydrateDone)
-
     const { spinAnim, yValueTitle, xValueSubtitle } = this.state;
     const spinSubtitle = createInterpolate(
       spinAnim,

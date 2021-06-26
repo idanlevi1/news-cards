@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Api from '../../utils/Api';
-import { Loader, NoResults, NewsCardList } from '../../components';
+import { Loader, NoResults, NewsCardList, Login } from '../../components';
 import { NEWS_PICKER_TYPE } from '../../utils/Enums';
 import Colors from '../../utils/Colors';
 import Modal from 'react-native-modal';
@@ -107,11 +107,13 @@ class NewsByCategory extends Component {
                             style={styles.filtersListHolder}
                             data={isModalVisible == NEWS_PICKER_TYPE.COUNTRIES ? NewsCountriesData : NewsSortTypesData}
                             keyExtractor={(item, index) => index.toString()}
-                            renderItem={this.renderOption} 
+                            renderItem={this.renderOption}
                             initialNumToRender={5}
-                            />
+                        />
                     </View>
                 </Modal>
+
+                <Login message={'To use Favorites you must log in first'} />
             </>
         )
     }
@@ -124,20 +126,10 @@ const mapStateToProps = (state) => {
         NewsStore: state.news
     };
 };
-//  const mapDispatchToProps = (dispatch) => {
-//     return {
-//        increment: () => dispatch(increment()),
-//        decrement: () => dispatch(decrement()),
-//        reset: () => dispatch(reset())
-//     };
-//  };
 
 export default connect(mapStateToProps, null)(NewsByCategory);
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.white,
-    },
     pickersLine: {
         paddingTop: 10,
         paddingBottom: 8,

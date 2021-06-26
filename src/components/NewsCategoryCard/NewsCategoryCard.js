@@ -3,6 +3,7 @@ import { StyleSheet, View, Image } from "react-native";
 import { Card, Title, TouchableRipple } from 'react-native-paper';
 import Colors from '../../utils/Colors';
 import Fonts from '../../utils/Fonts';
+import { capitalizeFirstLetter } from '../../utils/Tools';
 
 export default class NewsCategoryCard extends Component {
 
@@ -19,11 +20,11 @@ export default class NewsCategoryCard extends Component {
                         <View style={styles.cardView}>
                             <Image
                                 resizeMode={'cover'}
-                                size={45}
-                                style={styles.avatar}
-                                source={{ uri: image || 'https://cdn4.iconfinder.com/data/icons/basics-set-2/100/Question-512.png' }}
+                                style={styles.categoryImage}
+                                source={{ uri: image || 'https://cdn4.iconfinder.com/data/icons/basics-set-2/100/Question-512.png', cache: "force-cache" }}
+                                opacity={0.85}
                             />
-                            <Title style={styles.text}>{category}</Title>
+                            <Title style={styles.text}>{capitalizeFirstLetter(category)}</Title>
                         </View>
                     </Card.Content>
                 </Card>
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    avatar: {
+    categoryImage: {
         borderRadius: 35,
         marginHorizontal: 10,
         width: 56,

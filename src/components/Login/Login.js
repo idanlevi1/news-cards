@@ -6,161 +6,183 @@ import {
     GraphRequestManager,
     AccessToken,
 } from 'react-native-fbsdk';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import {
     TouchableOpacity,
     StyleSheet,
-    FlatList,
     ActivityIndicator,
     Dimensions,
     Text,
     View,
-    SafeAreaView,
-    StatusBar,
 } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { Loader } from '..';
+import Colors from '../../utils/Colors';
+import Fonts from '../../utils/Fonts';
+import { loginModalVisible, loginUser } from '../../store/userStore/userStore.actions';
+import { isLoginModalVisibleSelector } from '../../store/userStore/userStore.selectors';
+import Modal from 'react-native-modal';
 
 const { width } = Dimensions.get('window');
 
-const mapStateToProps = (state) => {
-    return {
-        // movies: state.showMovies.movies,
-        // error: state.showMovies.error,
-        // loading: state.showMovies.loading,
-        // name: state.userInfo.name,
-        // photo: state.userInfo.photo,
-        // auth: state.userInfo.auth,
-        // moviePage: state.showMovies.moviePage,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // onFetchCountires: () => dispatch(fetchMovies()),
-        // onLoggedIn: (cred) => dispatch(loginCredentials(cred)),
-    };
-};
-
-const facebookButton = async (props, setLoading) => {
-    setLoading(true);
-    const result = await LoginManager.logInWithPermissions([
-        'public_profile',
-        'email',
-    ]);
-    if (result.isCancelled) {
-        setLoading(false);
-    } else {
-        const data = await AccessToken.getCurrentAccessToken();
-        const responseInfoCallback = (error, res) => {
-            console.log("responseInfoCallback -> res", res)
-            if (error) {
-                console.log('Error fetching data: ' + error.toString());
-            } else {
-                // props.onLoggedIn([res.first_name, res.picture.data.url]);
-                console.log("responseInfoCallback -> [res.first_name, res.picture.data.url]", [res.name, res.picture.data.url])
-            }
-        };
-        const infoRequest = new GraphRequest(
-            '/me',
-            {
-                accessToken: data.accessToken,
-                parameters: {
-                    fields: {
-                        string: 'email,name,picture',
-                    },
-                },
-            },
-            responseInfoCallback,
-        );
-        new GraphRequestManager().addRequest(infoRequest).start();
-        setLoading(false);
-    }
-};
-
-
-const textButton = (props) => {
-    return !props.auth ? (
-        <Text style={styles.h2}>Log in to continue</Text>
-    ) : (
-            <Button
-                style={{ marginTop: 30 }}
-                title="Click to fetch Movies!"
-                buttonStyle={{ backgroundColor: '#ffd700' }}
-                titleStyle={{
-                    color: 'black',
-                    fontSize: 20,
-                }}
-                onPress={(() => { })}
-            />
-        );
-};
-const image = (props) => {
-    console.log("image -> props", props)
-    return <Text>AVATAR</Text>
-};
-
-const loadingFunc = (loadingState) => {
-    return loadingState ? <ActivityIndicator size="large" /> : <View />;
-};
 
 const Login = (props) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const isModalVisible = useSelector(isLoginModalVisibleSelector);
+    console.log("Login -> isModalVisible", isModalVisible)
+    const [loginState, setLoginState] = useState(null)
+    const onCloseModal = () => {
+        dispatch(loginModalVisible(false))
+        setTimeout(() => {
+            setLoginState(null)
+        }, 1000)
+    }
+
+    const facebookButton = async (props) => {
+        const result = await LoginManager.logInWithPermissions([
+            'public_profile',
+            'email',
+        ]);
+        if (result.isCancelled) {
+        } else {
+            const data = await AccessToken.getCurrentAccessToken();
+            const responseInfoCallback = (error, res) => {
+                console.log("responseInfoCallback -> res", res)
+                if (error) {
+                    setLoginState('An error occurred, please try again later 😔')
+                    console.log('Error fetching data: ' + error.toString());
+                } else {
+                    console.log("responseInfoCallback -> { accessToken: data.accessToken, name: res.name, avatar: res.picture.data.url}", { accessToken: data.accessToken, name: res.name, avatar: res.picture.data.url })
+                    dispatch(loginUser({ accessToken: data.accessToken, name: res.name, image: res.picture.data.url }))
+                    setLoginState("You've logged in successfully! 👏")
+                }
+            };
+            const infoRequest = new GraphRequest(
+                '/me',
+                {
+                    accessToken: data.accessToken,
+                    parameters: {
+                        fields: {
+                            string: 'email,name,picture',
+                        },
+                    },
+                },
+                responseInfoCallback,
+            );
+            new GraphRequestManager().addRequest(infoRequest).start();
+        }
+    };
+
     return (
-        <>
-            <SafeAreaView style={styles.container}>
-                <View style={styles.center}>
-                    <Text style={styles.h1}>{props.name}</Text>
-                    <View style={styles.avatar}>{image(props)}</View>
-                    {textButton(props)}
-                    {loadingFunc(loading)}
+        <Modal
+            isVisible={isModalVisible}
+            onSwipeComplete={onCloseModal}
+            swipeDirection="left"
+        >
+            <View style={styles.modalHolder}>
+                <TouchableOpacity
+                    style={styles.modalCloseButton}
+                    onPress={onCloseModal}>
+                    <Text style={styles.modalCloseIcon}>𝖷</Text>
+                </TouchableOpacity>
+                <View style={styles.modalHolderHeader}>
+                    <Text style={styles.modalHeaderTitle}>{props.message}</Text>
                 </View>
-                <View style={styles.row}>
-                    <TouchableOpacity onPress={() => facebookButton(props, setLoading)}>
-                        <Text>FACEBOOK LOGIN</Text>
+                {!loginState ?
+                    <TouchableOpacity style={styles.facebookLoginButton} onPress={() => facebookButton(props)}>
+                        <Text style={styles.facebookLoginButtonText}>{'Login with Facebook'}</Text>
                     </TouchableOpacity>
-                </View>
-            </SafeAreaView>
-        </>
+                    :
+                    <Text style={styles.loginStateText}>{loginState}</Text>
+                }
+            </View>
+        </Modal>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
+    modalHolder: {
+        backgroundColor: Colors.off_white,
+        borderRadius: 5,
+        overflow: 'hidden',
+        paddingTop: 10,
+        alignItems: 'center'
     },
-    center: {
-        flex: 1,
+    modalHolderHeader: {
         justifyContent: 'center',
-        textAlign: 'center',
-        alignSelf: 'center',
-        marginLeft: 5,
-        marginRight: 5,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.grey_green,
+        padding: 15,
+        marginTop: '8%'
     },
-    row: {
+    modalHeaderTitle: {
+        fontWeight: '500',
+        color: Colors.black,
+        fontSize: 20,
+        lineHeight: 26,
+        fontFamily: Fonts.KBWriter,
+    },
+    modalCloseButton: {
+        position: 'absolute',
+        alignItems: 'center',
+        borderRadius: 4,
+        top: 10,
+        left: 0,
+        width: 42,
+        height: 42,
+        backgroundColor: Colors.off_white,
+        zIndex: 9
+    },
+    modalCloseIcon: {
+        color: Colors.grey_green,
+        fontSize: 24
+    },
+    filtersListHolder: {
+        flex: 0,
+        backgroundColor: Colors.off_white
+    },
+    optionContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: 46,
+        paddingHorizontal: 8,
+        backgroundColor: Colors.off_white,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.grey_green,
+    },
+    optionIcon: {
+        color: Colors.black,
+        fontSize: 34,
+        paddingHorizontal: 10,
+    },
+    optionText: {
+        color: Colors.black,
+        fontSize: 22,
+        fontFamily: Fonts.KBWriterThin
+    },
+    facebookLoginButton: {
+        backgroundColor: '#4267B2',
+        borderRadius: 4,
         margin: 5,
+        width: 220,
+        height: 50,
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+        marginVertical: '10%'
     },
-    button: {
-        width: width * 0.45,
+    facebookLoginButtonText: {
+        color: '#FFF',
+        fontSize: 18,
+        fontWeight: '500',
+        textAlign: 'center'
     },
-    h1: {
-        fontSize: 35,
-        color: 'white',
+    loginStateText: {
+        fontSize: 20,
+        fontWeight: '500',
         textAlign: 'center',
-    },
-    h2: {
-        margin: 20,
-        fontSize: 25,
-        color: 'white',
-        textAlign: 'center',
-    },
-    avatar: {
-        alignSelf: 'center',
-        margin: 10,
-    },
+        paddingHorizontal: 10,
+        marginVertical: '12%'
+    }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

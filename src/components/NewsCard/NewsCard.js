@@ -19,7 +19,7 @@ const NewsCard = (props) => {
                 rippleColor={Colors.black_opacity}
             >
                 <>
-                    <Image transition={false} opacity={0.85} source={{ uri: image || noImageAvailable, cache: "force-cache" }} style={styles.image} />
+                    <Image source={{ uri: image || noImageAvailable, cache: "force-cache" }} opacity={0.85} style={styles.image} />
                     <FavoriteIcon article={article} />
                     <Card.Content>
                         <Headline style={styles.title} numberOfLines={3}>{title}</Headline>

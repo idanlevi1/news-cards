@@ -1,18 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
+import { View, StatusBar, useColorScheme } from 'react-native';
 import NewsStackNavigator from './src/routes/NewsStackNavigator';
 import Splash from './src/components/Splash/Splash';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Loader } from './src/components';
+// import { Loader, Login } from './src/components';
 import { store, persistor } from './src/store';
 // import { Settings } from 'react-native-fbsdk-next';
 
@@ -22,28 +14,21 @@ const App = () => {
 
   React.useEffect(() => {
     // Settings.initializeSDK();
-    setTimeout(() => setReady(true), 300)
+    setTimeout(() => setReady(true), 2000)
   }, [])
   return (
 
     <>
-      {/* <SafeAreaView > */}
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/* <Header title={'News Card'} /> */}
-      {/* <Categories /> */}
-      {ready ?
-        <Provider store={store}>
-          <PersistGate
-            loading={<Loader />}
-            persistor={persistor}>
+      <Provider store={store}>
+        <PersistGate loading={<View />} persistor={persistor}>
+          {ready ?
+
             <NewsStackNavigator />
-          </PersistGate>
-        </Provider> :
-        <Splash />
-
-
-      }
-      {/* </SafeAreaView> */}
+            :
+            <Splash />}
+        </PersistGate>
+      </Provider>
     </>
   );
 };

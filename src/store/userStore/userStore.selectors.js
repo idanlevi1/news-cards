@@ -1,22 +1,26 @@
 import { createSelector } from 'reselect';
 const baseNews = (state) => state.user
 
-const isUserConnected = createSelector(
+const isUserConnectedSelector = createSelector(
     baseNews,
-    (user) => {
-        return (user.isUserConnected)
-    },
+    (user) => (user.isConnectedUser),
 );
 
-const getUserData = createSelector(
+const getUserDataSelector = createSelector(
     baseNews,
     (user) => {
         return (user.userData)
     },
 );
 
+const isLoginModalVisibleSelector = createSelector(
+    baseNews,
+    (user) => (user.isLoginModalVisible),
+);
+
 
 export {
-    isUserConnected,
-    getUserData
+    isUserConnectedSelector,
+    getUserDataSelector,
+    isLoginModalVisibleSelector
 };

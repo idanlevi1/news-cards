@@ -1,10 +1,11 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
-import Colors from '../../utils/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllFavorites } from '../../store/newsStore/newsStore.actions';
 import { favoritesSelector } from '../../store/newsStore/newsStore.selectors';
 import { NewsCardList, NoResults } from '../../components';
+import Colors from '../../utils/Colors';
+import Fonts from '../../utils/Fonts';
 
 
 const Favorites = (props) => {
@@ -62,7 +63,8 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     toolBarText: {
-        fontSize: 18,
+        fontSize: 16,
+        fontFamily: Fonts.KBWriterThin,
         textAlign: 'center'
     },
     navigateButton: {
