@@ -5,10 +5,8 @@ const initialState = {
 };
 
 const newsReducer = (state = initialState, action) => {
-    console.log("newsReducer -> action", action)
     switch (action.type) {
         case ADD_TO_FAVORITES:
-            console.log('REDUX', initialState)
             return {
                 ...state,
                 favorites: [...state.favorites, action.payload]
@@ -19,7 +17,6 @@ const newsReducer = (state = initialState, action) => {
                 favorites: [...state.favorites.filter(favorite => favorite.title !== action.payload)]
             };
         case REMOVE_ALL_FAVORITES:
-                console.log("newsReducer -> REMOVE_FROM_FAVORITES", REMOVE_FROM_FAVORITES)
                 return {
                 ...state,
                 favorites: []

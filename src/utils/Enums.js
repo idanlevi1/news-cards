@@ -3,7 +3,7 @@ export const URLS = {
 }
 
 export const KEYS = {
-    NEWS_URL_ACCESS_KEYS: 'c3fffbd6b15ead2641bca70893a62611'
+    NEWS_URL_ACCESS_KEYS: 'e6d5ad2f0b29c5ef72304040d9545c73'
 }
 
 export const SCREENS = {
@@ -11,16 +11,6 @@ export const SCREENS = {
     NEWS_BY_CATEGORY: 'NewsByCategory',
     FAVORITES: 'Favorites',
     ARTICLE: 'Article',
-}
-
-export const LANGUAGES = {
-    ENGLISH: 'en',
-    HEBREW: 'he',
-    GERMAN: 'de',
-    FRENCH: 'fr',
-    ITALIAN: 'it',
-    CHINESE: 'zh',
-    PORTUGUESE: 'pt',
 }
 
 export const NEWS_PICKER_TYPE = {

@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderRightWidth: 2,
         borderRadius: 4,
-        padding: 5,
+        padding: 7,
     },
     toolBarText: {
         fontSize: 16,

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "release-android": "cd android && ./gradlew assembleRelease",
     "ios": "react-native run-ios",
     "ios12pro": "export ENVFILE=.env.dev && react-native run-ios --simulator='iPhone 12 Pro'",
     "start": "react-native start",

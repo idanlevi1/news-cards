@@ -16,10 +16,8 @@ const Header = (props) => {
             isUserConnected ?
                 <View style={styles.rightSideContainer}>
                     <Image
-                        resizeMode={'cover'}
                         style={{ width: 30, height: 30, borderRadius: 35 }}
-                        source={{ uri: userData.image || 'https://cdn4.iconfinder.com/data/icons/basics-set-2/100/Question-512.png' }}
-                        opacity={0.85}
+                        source={{ uri: userData.image, cache: "force-cache" }}
                     />
                     <Text style={styles.text}>{userData.name}</Text>
                 </View> :

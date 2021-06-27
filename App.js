@@ -21,7 +21,6 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={<View />} persistor={persistor}>
           {ready ?
-
             <NewsStackNavigator />
             :
             <Splash />}

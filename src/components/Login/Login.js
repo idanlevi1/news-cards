@@ -39,10 +39,10 @@ const Login = (props) => {
         } else {
             const data = await AccessToken.getCurrentAccessToken();
             const responseInfoCallback = (error, res) => {
-                console.log("responseInfoCallback -> res", res)
+                console.log("[Facebook response]", res)
                 if (error) {
                     setLoginState('An error occurred, please try again later 😔')
-                    console.log('Error fetching data: ' + error.toString());
+                    console.log('[Facebook Error]' + error.toString());
                 } else {
                     dispatch(loginUser({ accessToken: data.accessToken, name: res.name, image: res.picture.data.url }))
                     setLoginState("You've logged in successfully! 👏")

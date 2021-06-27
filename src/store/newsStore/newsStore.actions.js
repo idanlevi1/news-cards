@@ -19,7 +19,6 @@ export function removeNewsFromFavorites(news) {
 }
 
 export function removeAllFavorites() {
-    console.log("removeAllFavorites -> removeAllFavorites")
     return {
         type: REMOVE_ALL_FAVORITES,
     }

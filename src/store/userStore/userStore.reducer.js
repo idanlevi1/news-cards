@@ -21,7 +21,6 @@ const userReducer = (state = initialState, action) => {
                 userData: {}
             };
         case LOGIN_MODAL_VISIBLE:
-        console.log("userReducer -> LOGIN_MODAL_VISIBLE", LOGIN_MODAL_VISIBLE)
             return {
                 ...state,
                 isLoginModalVisible: action.payload

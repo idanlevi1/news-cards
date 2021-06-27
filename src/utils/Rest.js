@@ -3,15 +3,12 @@
 
 export const Rest = (url, params) => {
     let apiUrl = url
-    console.log("Rest -> url", url)
     if (params) {
         apiUrl = withQuery(url, params)
     }
-    console.log("Rest -> apiUrl", apiUrl)
     return fetch(apiUrl)
         .then(res => res.json())
         .then((data) => {
-            console.log("Rest -> data", data)
             return data
         })
         .catch(console.log)

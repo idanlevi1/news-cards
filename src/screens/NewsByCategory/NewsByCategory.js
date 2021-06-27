@@ -32,14 +32,12 @@ class NewsByCategory extends Component {
             const { category } = route.params;
             const { country, sortType } = this.state;
             const news = await Api.GetNews({ categories: category, languages: country.language, countries: country.symbol, sort: sortType.type });
-            console.log("Categories -> componentDidMount -> news", news);
             if (news.error) {
                 throw new Error(news.error.message);
             }
             this.setState({ news: news.data, isLoading: false, error: false });
         }
         catch (error) {
-            console.log("NewsByCategory -> componentDidMount -> error", error);
             this.setState({ news: [], isLoading: false, error: error.toString() });
         }
     }
@@ -120,7 +118,6 @@ class NewsByCategory extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log("mapStateToProps -> state", state)
     return {
         NewsStore: state.news
     };
@@ -200,10 +197,11 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.off_white,
         borderBottomWidth: 1,
         borderBottomColor: Colors.grey_green,
+        // marginBottom: 10,
     },
     optionIcon: {
         color: Colors.black,
-        fontSize: 34,
+        fontSize: 28,
         paddingHorizontal: 10,
     },
     optionText: {
